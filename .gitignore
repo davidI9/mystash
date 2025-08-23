@@ -1,0 +1,5 @@
+/.pytest_cache
+/.vscode
+/TODOS.txt
+/__pycache__
+/env
