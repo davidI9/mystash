@@ -3,3 +3,4 @@
 /TODOS.txt
 /__pycache__
 /env
+*.pyc
