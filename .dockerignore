@@ -1,0 +1,7 @@
+mongo_volume
+.vscode
+.pytest_cache
+*.pyc
+.gitignore
+README.txt
+TODOS.txt
