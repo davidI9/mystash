@@ -3,8 +3,8 @@ from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord
 from ..Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
 from src.RecordLifecycle.domain.ValueObjects import RecordId
 
-def get_videogame_record_by_id(id: RecordId):
-    repository = VideogameRecordRepositoryImpl()
+def get_videogame_record_by_id(id: RecordId, connection_url: str):
+    repository = VideogameRecordRepositoryImpl(connection_url)
     command = GetVideogameRecordCommand(id)
     handler = GetVideogameRecordHandler(repository)
     

@@ -4,8 +4,8 @@ from src.RecordLifecycle.domain.ValueObjects import VideogameDescription, Videog
 
 class VideogameMongodbRepo:
         
-        def __init__(self):
-            database = (MongoClient("mongodb://localhost:27017/"))["base_de_datos"]
+        def __init__(self, connection_url: str):
+            database = (MongoClient(connection_url))["base_de_datos"]
             self.videogame_records = database["videogame_records"]
         
         def save_in_db(self, record: VideogameRecord):

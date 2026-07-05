@@ -4,8 +4,8 @@ from .VideogameMongodbRepo import VideogameMongodbRepo
 
 class VideogameRecordRepositoryImpl(VideogameRecordRepository):
     
-    def __init__(self):
-        self.videogame_records_db = VideogameMongodbRepo()
+    def __init__(self, connection_url: str):
+        self.videogame_records_db = VideogameMongodbRepo(connection_url)
     
     def save(self, record: VideogameRecord):
         self.videogame_records_db.save_in_db(record)

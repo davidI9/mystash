@@ -12,9 +12,9 @@ class CreateVidegameRecordRequest(BaseModel):
     playtime: int
     rating: float | int
 
-def create_videogame_record(create_request: CreateVidegameRecordRequest):
+def create_videogame_record(create_request: CreateVidegameRecordRequest, connection_url: str):
     
-    repository = VideogameRecordRepositoryImpl()
+    repository = VideogameRecordRepositoryImpl(connection_url)
     command = CreateVideogameRecordCommand(create_request.author, create_request.title, create_request.date, create_request.description, create_request.playtime, create_request.rating)
     handler = CreateVideogameRecordHandler(repository)
     
