@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from src.RecordLifecycle.domain.VideogameRecord import VideogameRecord
+from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
 from src.RecordLifecycle.domain.ValueObjects import VideogameDescription, VideogamePlaytime, VideogameRating, AuthorId, CreationDate, RecordTitle
 
 class VideogameMongodbRepo:

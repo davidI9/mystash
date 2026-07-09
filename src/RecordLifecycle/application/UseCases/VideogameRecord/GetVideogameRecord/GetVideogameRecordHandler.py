@@ -1,6 +1,6 @@
 from .GetVideogameRecordCommand import GetVideogameRecordCommand
 from ....Repositories.VideogameRecordRepository import VideogameRecordRepository
-from src.RecordLifecycle.domain.VideogameRecord import VideogameRecord
+from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
 
 #FALTAN LAS PUBLICACIONES DE EVENTOS DE DOMINIO
 

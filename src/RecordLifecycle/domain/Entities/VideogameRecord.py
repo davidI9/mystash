@@ -1,8 +1,8 @@
 from .Record import Record
 from dataclasses import dataclass
-from .ValueObjects.VideogameDescription import VideogameDescription
-from .ValueObjects.VideogameRating import VideogameRating
-from .ValueObjects.VideogamePlaytime import VideogamePlaytime
+from ..ValueObjects.VideogameDescription import VideogameDescription
+from ..ValueObjects.VideogameRating import VideogameRating
+from ..ValueObjects.VideogamePlaytime import VideogamePlaytime
 
 @dataclass
 class VideogameRecord(Record):

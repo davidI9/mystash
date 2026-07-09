@@ -1,5 +1,5 @@
 from src.RecordLifecycle.application.Repositories.VideogameRecordRepository import VideogameRecordRepository
-from src.RecordLifecycle.domain.VideogameRecord import VideogameRecord
+from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
 from .VideogameMongodbRepo import VideogameMongodbRepo
 
 class VideogameRecordRepositoryImpl(VideogameRecordRepository):
