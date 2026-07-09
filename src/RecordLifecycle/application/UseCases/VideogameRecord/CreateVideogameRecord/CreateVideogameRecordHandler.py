@@ -1,6 +1,6 @@
 from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
 from src.RecordLifecycle.domain.ValueObjects import RecordTitle, VideogameDescription, VideogamePlaytime, VideogameRating, AuthorId, CreationDate
-from ....Repositories.VideogameRecordRepository import VideogameRecordRepository
+from src.RecordLifecycle.domain.Repositories.VideogameRecordRepository import VideogameRecordRepository
 from .CreateVideogameRecordCommand import CreateVideogameRecordCommand
 
 class CreateVideogameRecordHandler:

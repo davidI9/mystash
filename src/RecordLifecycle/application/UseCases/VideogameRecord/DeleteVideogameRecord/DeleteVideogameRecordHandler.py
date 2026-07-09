@@ -1,4 +1,4 @@
-from ....Repositories.VideogameRecordRepository import VideogameRecordRepository
+from src.RecordLifecycle.domain.Repositories.VideogameRecordRepository import VideogameRecordRepository
 from .DeleteVideogameRecordCommand import DeleteVideogameRecordCommand
 
 class DeleteVideogameRecordHandler:
