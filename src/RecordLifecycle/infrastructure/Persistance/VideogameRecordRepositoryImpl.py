@@ -15,3 +15,6 @@ class VideogameRecordRepositoryImpl(VideogameRecordRepository):
     
     def delete_by_id(self, id):
         return self.videogame_records_db.delete_by_id(id)
+    
+    def get_user_records(self, author_id):
+        return self.videogame_records_db.get_user_records(author_id)

@@ -1,15 +1,13 @@
 from pymongo import MongoClient
 from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
-from src.RecordLifecycle.domain.ValueObjects import VideogameDescription, VideogamePlaytime, VideogameRating, AuthorId, CreationDate, RecordTitle
+from src.RecordLifecycle.domain.ValueObjects import VideogameDescription, VideogamePlaytime, VideogameRating, AuthorId, CreationDate, RecordTitle, RecordId
 
 class VideogameMongodbRepo:
-        
         def __init__(self, connection_url: str):
             database = (MongoClient(connection_url))["base_de_datos"]
             self.videogame_records = database["videogame_records"]
         
         def save_in_db(self, record: VideogameRecord):
-            
             try:    
                 self.videogame_records.insert_one({
                     "author_id": str(record.get_author()),
@@ -24,10 +22,9 @@ class VideogameMongodbRepo:
             except Exception as e:
                 print(f"An error has occurred while saving in MongoDB: {e}")
         
-        def get_by_id_from_db(self, id):
-            
+        def get_by_id_from_db(self, id: RecordId):
             try:
-                raw_record = self.videogame_records.find_one({"record_id": id})
+                raw_record = self.videogame_records.find_one({"record_id": str(id)})
                 record = self.map_record(raw_record)
                 return record
             
@@ -42,5 +39,13 @@ class VideogameMongodbRepo:
             try:
                 self.videogame_records.delete_one({"record_id": id})
                 print("Deleted without errors.")
+            except Exception as e:
+                print(e)
+                
+        def get_user_records(self, author_id):
+            try:
+                raw_records = self.videogame_records.find({"author_id": author_id})
+                records = [self.map_record(raw_record) for raw_record in raw_records]
+                return records
             except Exception as e:
                 print(e)

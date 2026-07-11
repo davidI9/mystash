@@ -1,5 +1,5 @@
 from abc import ABC
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from ..ValueObjects.RecordId import RecordId
 from ..ValueObjects.AuthorId import AuthorId 
 from ..ValueObjects.RecordTitle import RecordTitle
