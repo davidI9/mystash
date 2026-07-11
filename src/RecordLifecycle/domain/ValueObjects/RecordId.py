@@ -1,8 +1,12 @@
-from uuid import uuid4
+import uuid
 
 class RecordId:
-    def __init__(self):
-        self._id = uuid4()
+    def __init__(self, record_id: str):
+        try:
+            holder = uuid.UUID(record_id, version=4)
+            self._id = str(holder)
+        except ValueError:
+            raise ValueError("Invalid record ID")
     
     def __repr__(self):
         return str(self._id)

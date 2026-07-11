@@ -3,9 +3,6 @@ from src.RecordLifecycle.application.UseCases.VideogameRecord.GetUserVideogameRe
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetUserVideogameRecords.GetUserVideogameRecordsHandler import GetUserVideogameRecordsHandler
 from src.RecordLifecycle.domain.ValueObjects import AuthorId
 from ..Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
-
-class GetUserVideogameRecordsRequest(BaseModel):
-    author_id: str
     
 def get_user_videogame_records(author_id: str, connection_url: str):
     repository = VideogameRecordRepositoryImpl(connection_url)

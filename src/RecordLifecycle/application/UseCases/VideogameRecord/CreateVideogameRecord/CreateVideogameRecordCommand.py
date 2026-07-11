@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
-from src.RecordLifecycle.domain.ValueObjects import RecordId, AuthorId
+from src.RecordLifecycle.domain.ValueObjects import CreationDate, RecordId, AuthorId, RecordTitle, VideogameDescription, VideogamePlaytime, VideogameRating
 
 @dataclass
 class CreateVideogameRecordCommand:
     author: AuthorId
-    title: str
-    date: str
-    description: str
-    playtime: int
-    rating: float | int
-    id: 'RecordId' = field(default_factory=lambda: RecordId())
+    title: RecordTitle
+    date: CreationDate
+    description: VideogameDescription
+    playtime: VideogamePlaytime
+    rating: VideogameRating
+    id: RecordId

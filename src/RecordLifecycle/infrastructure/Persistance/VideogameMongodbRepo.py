@@ -44,7 +44,7 @@ class VideogameMongodbRepo:
                 
         def get_user_records(self, author_id):
             try:
-                raw_records = self.videogame_records.find({"author_id": author_id})
+                raw_records = self.videogame_records.find({"author_id": str(author_id)})
                 records = [self.map_record(raw_record) for raw_record in raw_records]
                 return records
             except Exception as e:
