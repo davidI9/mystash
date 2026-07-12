@@ -18,3 +18,6 @@ class VideogameRecordRepositoryImpl(VideogameRecordRepository):
     
     def get_user_records(self, author_id):
         return self.videogame_records_db.get_user_records(author_id)
+    
+    def update_record(self, record: VideogameRecord):
+        return self.videogame_records_db.update_record(record)

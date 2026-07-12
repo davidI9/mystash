@@ -19,3 +19,7 @@ class VideogameRecordRepository(ABC):
     @abstractmethod
     def get_user_records(self, author_id: AuthorId):
         pass
+    
+    @abstractmethod
+    def update_record(self, record: VideogameRecord):
+        pass
