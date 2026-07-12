@@ -14,7 +14,7 @@ class Record(ABC):
     id: RecordId
 
     def get_id(self):
-        return self._id
+        return self.id
 
     def get_author(self):
         return self.author
