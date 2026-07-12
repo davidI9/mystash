@@ -49,3 +49,19 @@ class VideogameMongodbRepo:
                 return records
             except Exception as e:
                 print(e)
+                
+        def update_record(self, record: VideogameRecord):
+            try:
+                self.videogame_records.update_one(
+                    {"record_id": str(record.get_id())},
+                    {"$set": {
+                        "title": str(record.get_title()),
+                        "description": str(record.get_description()),
+                        "creation_date": str(record.get_date()),
+                        "rating": float(record.get_rating()),
+                        "playtime": int(record.get_playtime())
+                    }}
+                )
+                print("Record updated successfully.")
+            except Exception as e:
+                print(f"An error has occurred while updating the record in MongoDB: {e}")
