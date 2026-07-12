@@ -1,5 +1,5 @@
-from src.RecordLifecycle.application.UseCases.VideogameRecord.CreateVideogameRecord.CreateVideogameRecordCommand import CreateVideogameRecordCommand
-from src.RecordLifecycle.application.UseCases.VideogameRecord.CreateVideogameRecord.CreateVideogameRecordHandler import CreateVideogameRecordHandler
+from src.RecordLifecycle.application.UseCases.VideogameRecord.UpdateVideogameRecord.UpdateVideogameRecordCommand import UpdateVideogameRecordCommand
+from src.RecordLifecycle.application.UseCases.VideogameRecord.UpdateVideogameRecord.UpdateVideogameRecordHandler import UpdateVideogameRecordHandler
 from src.RecordLifecycle.domain.ValueObjects.AuthorId import AuthorId
 from src.RecordLifecycle.domain.ValueObjects.RecordId import RecordId
 from src.RecordLifecycle.domain.ValueObjects.RecordTitle import RecordTitle
@@ -9,26 +9,26 @@ from src.RecordLifecycle.domain.ValueObjects.VideogamePlaytime import VideogameP
 from src.RecordLifecycle.domain.ValueObjects.VideogameRating import VideogameRating
 from ..Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
 from pydantic import BaseModel
-import uuid
 
-class CreateVidegameRecordRequest(BaseModel):
-    author: str
+class UpdateVideogameRecordRequest(BaseModel):
+    id: str
+    author_id: str
     title: str
-    date: str
     description: str
     playtime: int
     rating: float | int
+    date: str
 
-def create_videogame_record(create_request: CreateVidegameRecordRequest, connection_url: str):
+def update_videogame_record(update_request: UpdateVideogameRecordRequest, connection_url: str):
     repository = VideogameRecordRepositoryImpl(connection_url)
     
     try:
-        command = CreateVideogameRecordCommand(AuthorId(create_request.author), RecordTitle(create_request.title), CreationDate(create_request.date), VideogameDescription(create_request.description), VideogamePlaytime(create_request.playtime), VideogameRating(create_request.rating), RecordId(uuid.UUID(version=4)))
+        command = UpdateVideogameRecordCommand(RecordId(update_request.id), AuthorId(update_request.author_id), RecordTitle(update_request.title), VideogameDescription(update_request.description), VideogamePlaytime(update_request.playtime), VideogameRating(update_request.rating), CreationDate(update_request.date))
     except Exception as e:
         print(f"An error has occurred while creating the command: {e}")
         return None
 
-    handler = CreateVideogameRecordHandler(repository)
+    handler = UpdateVideogameRecordHandler(repository)
     
     handler.handle(command)
     return command.id
