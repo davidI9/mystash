@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
-from src.RecordLifecycle.domain.ValueObjects import AuthorId, RecordId
+from src.RecordLifecycle.domain.ValueObjects.AuthorId import AuthorId
+from src.RecordLifecycle.domain.ValueObjects.RecordId import RecordId
 
 class VideogameRecordRepository(ABC):
     

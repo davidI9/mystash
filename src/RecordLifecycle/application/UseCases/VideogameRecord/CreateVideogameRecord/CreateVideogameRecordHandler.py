@@ -7,21 +7,8 @@ class CreateVideogameRecordHandler:
     def __init__(self, repository: VideogameRecordRepository):
         self.repository = repository
     
-    def handle(self, command: CreateVideogameRecordCommand):
-        
-        try:
-            author = command.author
-            title = RecordTitle(command.title)
-            date = CreationDate(command.date)
-            id = command.id
-            description = VideogameDescription(command.description)
-            rating = VideogameRating(command.rating)
-            playtime = VideogamePlaytime(command.playtime)
-            
-        except Exception as e:
-            print(f"An error has ocurred while asigning the record's arguments: {e}")
-        
-        self.VideogameRecord = VideogameRecord(author, title, date, id, description, rating, playtime)
+    def handle(self, command: CreateVideogameRecordCommand):        
+        self.VideogameRecord = VideogameRecord(command.author, command.title, command.date, command.id, command.description, command.rating, command.playtime)
 
         try:
             self.repository.save(self.VideogameRecord)

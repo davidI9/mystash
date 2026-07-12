@@ -2,8 +2,6 @@ from .GetVideogameRecordCommand import GetVideogameRecordCommand
 from src.RecordLifecycle.domain.Repositories.VideogameRecordRepository import VideogameRecordRepository
 from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
 
-#FALTAN LAS PUBLICACIONES DE EVENTOS DE DOMINIO
-
 class GetVideogameRecordHandler:
     
     def __init__(self, repository: VideogameRecordRepository):

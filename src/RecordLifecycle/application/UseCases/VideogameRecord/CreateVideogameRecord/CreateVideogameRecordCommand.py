@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from src.RecordLifecycle.domain.ValueObjects import CreationDate, RecordId, AuthorId, RecordTitle, VideogameDescription, VideogamePlaytime, VideogameRating
 
-@dataclass
+@dataclass(frozen=True)
 class CreateVideogameRecordCommand:
     author: AuthorId
     title: RecordTitle

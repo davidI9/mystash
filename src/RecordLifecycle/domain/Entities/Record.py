@@ -8,30 +8,33 @@ from ..ValueObjects.CreationDate import CreationDate
 @dataclass
 class Record(ABC):
     
-    _author: AuthorId 
-    _title: RecordTitle
-    _date: CreationDate
-    _id: RecordId
+    author: AuthorId 
+    title: RecordTitle
+    date: CreationDate
+    id: RecordId
 
     def get_id(self):
         return self._id
 
     def get_author(self):
-        return self._author
+        return self.author
 
     def set_title(self, new_title: RecordTitle):
         if not isinstance(new_title, RecordTitle):
             raise TypeError("The new title must be a RecordTitle type object.")
-        self._title = new_title
+        self.title = new_title
     
     def get_title(self):
-        return self._title
+        return self.title
     
     def set_date(self, new_date: CreationDate):
         if not isinstance(new_date, CreationDate):
             raise TypeError("The new date must be a CreationDate type object.")
-        self._date = new_date
+        self.date = new_date
     
     def get_date(self):
-        return self._date
+        return self.date
+    
+    def __eq__(self, value):
+        return isinstance(value, Record) and self.id == value.id and self.author == value.author
     

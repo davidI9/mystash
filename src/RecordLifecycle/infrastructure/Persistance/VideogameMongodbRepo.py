@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
-from src.RecordLifecycle.domain.ValueObjects import RecordId, AuthorId
+from src.RecordLifecycle.domain.ValueObjects.RecordId import RecordId
+from src.RecordLifecycle.domain.ValueObjects.AuthorId import AuthorId
 
 class VideogameMongodbRepo:
         def __init__(self, connection_url: str):
@@ -53,7 +54,7 @@ class VideogameMongodbRepo:
         def update_record(self, record: VideogameRecord):
             try:
                 self.videogame_records.update_one(
-                    {"record_id": str(record.get_id())},
+                    {"record_id": str(record.get_id()), "author_id": str(record.get_author())},
                     {"$set": {
                         "title": str(record.get_title()),
                         "description": str(record.get_description()),
