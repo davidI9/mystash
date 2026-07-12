@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
-from src.RecordLifecycle.domain.ValueObjects import VideogameDescription, VideogamePlaytime, VideogameRating, AuthorId, CreationDate, RecordTitle, RecordId
+from src.RecordLifecycle.domain.ValueObjects import RecordId, AuthorId
 
 class VideogameMongodbRepo:
         def __init__(self, connection_url: str):
@@ -35,14 +35,14 @@ class VideogameMongodbRepo:
             record = VideogameRecord(raw_record["author_id"], raw_record["title"], raw_record["creation_date"], raw_record["record_id"], raw_record["description"], raw_record["rating"], raw_record["playtime"])
             return record
         
-        def delete_by_id(self, id):
+        def delete_by_id(self, id: RecordId):
             try:
-                self.videogame_records.delete_one({"record_id": id})
+                self.videogame_records.delete_one({"record_id": str(id)})
                 print("Deleted without errors.")
             except Exception as e:
                 print(e)
                 
-        def get_user_records(self, author_id):
+        def get_user_records(self, author_id: AuthorId):
             try:
                 raw_records = self.videogame_records.find({"author_id": str(author_id)})
                 records = [self.map_record(raw_record) for raw_record in raw_records]
