@@ -1,11 +1,10 @@
-from pymongo import MongoClient
 from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
 from src.RecordLifecycle.domain.ValueObjects.RecordId import RecordId
 from src.RecordLifecycle.domain.ValueObjects.AuthorId import AuthorId
+from pymongo import MongoClient
 
 class VideogameMongodbRepo:
-        def __init__(self, connection_url: str):
-            database = (MongoClient(connection_url))["base_de_datos"]
+        def __init__(self, database: MongoClient):
             self.videogame_records = database["videogame_records"]
         
         def save_in_db(self, record: VideogameRecord):

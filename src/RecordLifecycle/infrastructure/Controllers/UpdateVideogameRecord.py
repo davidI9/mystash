@@ -19,9 +19,7 @@ class UpdateVideogameRecordRequest(BaseModel):
     rating: float | int
     date: str
 
-def update_videogame_record(update_request: UpdateVideogameRecordRequest, connection_url: str):
-    repository = VideogameRecordRepositoryImpl(connection_url)
-    
+def update_videogame_record(update_request: UpdateVideogameRecordRequest, repository: VideogameRecordRepositoryImpl):
     try:
         command = UpdateVideogameRecordCommand(RecordId(update_request.id), AuthorId(update_request.author_id), RecordTitle(update_request.title), VideogameDescription(update_request.description), VideogamePlaytime(update_request.playtime), VideogameRating(update_request.rating), CreationDate(update_request.date))
     except Exception as e:

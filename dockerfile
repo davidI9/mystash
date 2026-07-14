@@ -13,4 +13,4 @@ EXPOSE 8000
 
 FROM base as startup
 
-CMD ["uv", "run", "fastapi", "run", "src/RecordLifecycle/infrastructure/Controllers/VideogameRecordApi.py", "--port", "8000"]
+CMD ["uv", "run", "fastapi", "run", "src/RecordLifecycle/infrastructure/main.py", "--port", "8000"]
