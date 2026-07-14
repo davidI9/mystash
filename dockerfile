@@ -9,6 +9,8 @@ COPY . .
 
 RUN uv sync --locked
 
+RUN uv run mypy .
+
 EXPOSE 8000
 
 FROM base as startup
