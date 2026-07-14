@@ -1,8 +1,8 @@
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord.GetVideogameRecordCommand import GetVideogameRecordCommand
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord.GetVideogameRecordHandler import GetVideogameRecordHandler
 from src.RecordLifecycle.domain.ValueObjects import RecordTitle, VideogameDescription, VideogamePlaytime, VideogameRating, CreationDate
-from src.RecordLifecycle.domain.VideogameRecord import VideogameRecord
-from src.RecordLifecycle.application.Repositories.VideogameRecordRepository import VideogameRecordRepository
+from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
+from src.RecordLifecycle.domain.Repositories.VideogameRecordRepository import VideogameRecordRepository
 
 class fake_repo_impl(VideogameRecordRepository):
     def save(self, record):
@@ -14,6 +14,12 @@ class fake_repo_impl(VideogameRecordRepository):
         return None
     
     def delete_by_id(self, id):
+        pass
+    
+    def update_record(self, record):
+        pass
+    
+    def get_user_records(self, user_id):
         pass
     
 
