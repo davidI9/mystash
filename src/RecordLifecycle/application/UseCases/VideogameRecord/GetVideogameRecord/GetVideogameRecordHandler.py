@@ -14,4 +14,4 @@ class GetVideogameRecordHandler:
             return record
         
         except Exception as e:
-            print(f"An error has ocurred while getting the record: {e}")
+            raise ValueError(f"An error has ocurred while getting the record: {e}")

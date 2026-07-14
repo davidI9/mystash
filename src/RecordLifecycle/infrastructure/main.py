@@ -9,12 +9,17 @@ from .Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepository
 from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
+from pymongo.database import Database
+
+client: MongoClient
+database: Database
 
 load_dotenv()
 mongo_url = os.getenv("MONGODB_URL")
-database = (MongoClient(mongo_url))["base_de_datos"]
+client = MongoClient(mongo_url)
+database = client["base_de_datos"]
 
-repo = VideogameRecordRepositoryImpl(VideogameMongodbRepo(database))
+repo = VideogameRecordRepositoryImpl(database)
 
 app = FastAPI()
 

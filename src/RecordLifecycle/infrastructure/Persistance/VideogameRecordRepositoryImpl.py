@@ -1,11 +1,12 @@
+from pymongo.database import Database
 from src.RecordLifecycle.domain.Repositories.VideogameRecordRepository import VideogameRecordRepository
 from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
 from .VideogameMongodbRepo import VideogameMongodbRepo
 
 class VideogameRecordRepositoryImpl(VideogameRecordRepository):
     
-    def __init__(self, connection_url: str):
-        self.videogame_records_db = VideogameMongodbRepo(connection_url)
+    def __init__(self, database: Database):
+        self.videogame_records_db = VideogameMongodbRepo(database)
     
     def save(self, record: VideogameRecord):
         self.videogame_records_db.save_in_db(record)

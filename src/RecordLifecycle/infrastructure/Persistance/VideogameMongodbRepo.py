@@ -1,10 +1,12 @@
 from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
 from src.RecordLifecycle.domain.ValueObjects.RecordId import RecordId
 from src.RecordLifecycle.domain.ValueObjects.AuthorId import AuthorId
-from pymongo import MongoClient
+from pymongo.database import Database
+from pymongo.cursor import Cursor
+from typing import Any
 
 class VideogameMongodbRepo:
-        def __init__(self, database: MongoClient):
+        def __init__(self, database: Database):
             self.videogame_records = database["videogame_records"]
         
         def save_in_db(self, record: VideogameRecord):
@@ -23,6 +25,9 @@ class VideogameMongodbRepo:
                 print(f"An error has occurred while saving in MongoDB: {e}")
         
         def get_by_id_from_db(self, id: RecordId):
+            raw_record: dict[str, Any] | None
+            record: VideogameRecord | None
+            
             try:
                 raw_record = self.videogame_records.find_one({"record_id": str(id)})
                 record = self.map_record(raw_record)
@@ -43,6 +48,8 @@ class VideogameMongodbRepo:
                 print(e)
                 
         def get_user_records(self, author_id: AuthorId):
+            raw_records: Cursor
+
             try:
                 raw_records = self.videogame_records.find({"author_id": str(author_id)})
                 records = [self.map_record(raw_record) for raw_record in raw_records]
