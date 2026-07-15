@@ -10,20 +10,19 @@ def get_user_videogame_records_endpoint(handler: GetUserVideogameRecordsHandler)
     @router.get("/VideogamesRecords/get_user_records/{author_id}")
     async def get_user_records(author_id: str):
         try:
-            records = get_user_videogame_records(author_id, handler.repository)
+            records = get_user_videogame_records(author_id, handler)
             return records
         except Exception as e:
             print(e)
 
     return router
     
-def get_user_videogame_records(author_id: str, repository: VideogameRecordRepositoryImpl):
+def get_user_videogame_records(author_id: str, handler: GetUserVideogameRecordsHandler):
     try:
         command = GetUserVideogameRecordsCommand(AuthorId(author_id))
     except Exception as e:
         print(f"An error has occurred while creating the command: {e}")
         return None
-    handler = GetUserVideogameRecordsHandler(repository)
     
     records = handler.handle(command)
     return records
