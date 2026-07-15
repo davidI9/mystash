@@ -7,7 +7,6 @@ from src.RecordLifecycle.domain.ValueObjects.CreationDate import CreationDate
 from src.RecordLifecycle.domain.ValueObjects.VideogameDescription import VideogameDescription
 from src.RecordLifecycle.domain.ValueObjects.VideogamePlaytime import VideogamePlaytime
 from src.RecordLifecycle.domain.ValueObjects.VideogameRating import VideogameRating
-from ..Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
 from fastapi import APIRouter
 from pydantic import BaseModel
 import uuid

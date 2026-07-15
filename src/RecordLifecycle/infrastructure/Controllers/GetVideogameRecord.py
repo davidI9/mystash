@@ -1,6 +1,5 @@
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord.GetVideogameRecordCommand import GetVideogameRecordCommand
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord.GetVideogameRecordHandler import GetVideogameRecordHandler
-from ..Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
 from src.RecordLifecycle.domain.ValueObjects import RecordId
 from ..main import repo
 from fastapi import APIRouter
