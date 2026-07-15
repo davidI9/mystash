@@ -3,11 +3,12 @@ from .Controllers.GetVideogameRecord import create_get_videogame_record_by_id_en
 from .Controllers.CreateVideogameRecord import create_videogame_record_endpoint
 from .Controllers.DeleteVideogameRecord import delete_videogame_record_by_id_endpoint
 from .Controllers.GetUserVideogameRecords import get_user_videogame_records_endpoint
-from .Controllers.UpdateVideogameRecord import update_videogame_record, UpdateVideogameRecordRequest
+from .Controllers.UpdateVideogameRecord import update_videogame_record_endpoint
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord.GetVideogameRecordHandler import GetVideogameRecordHandler
 from src.RecordLifecycle.application.UseCases.VideogameRecord.CreateVideogameRecord.CreateVideogameRecordHandler import CreateVideogameRecordHandler
 from src.RecordLifecycle.application.UseCases.VideogameRecord.DeleteVideogameRecord.DeleteVideogameRecordHandler import DeleteVideogameRecordHandler
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetUserVideogameRecords.GetUserVideogameRecordsHandler import GetUserVideogameRecordsHandler
+from src.RecordLifecycle.application.UseCases.VideogameRecord.UpdateVideogameRecord.UpdateVideogameRecordHandler import UpdateVideogameRecordHandler
 from .Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
 from dotenv import load_dotenv
 import os
@@ -37,24 +38,12 @@ delete_videogame_record_router = delete_videogame_record_by_id_endpoint(delete_v
 get_user_videogame_records_handler = GetUserVideogameRecordsHandler(repo)
 get_user_videogame_records_router = get_user_videogame_records_endpoint(get_user_videogame_records_handler)
 
+update_videogame_record_handler = UpdateVideogameRecordHandler(repo)
+update_videogame_record_router = update_videogame_record_endpoint(update_videogame_record_handler)
+
 app = FastAPI()
 app.include_router(get_videogame_record_router)
 app.include_router(create_videogame_record_router)
 app.include_router(delete_videogame_record_router)
 app.include_router(get_user_videogame_records_router)
-
-@app.get("/VideogamesRecords/get_user_records/{author_id}")
-async def get_user_records(author_id: str):
-    try:
-        records = get_user_videogame_records(author_id, repo)
-        return records
-    except Exception as e:
-        print(e)
-        
-@app.post("/VideogamesRecords/update")
-async def update_record(update_request: UpdateVideogameRecordRequest):
-    try:
-        id = update_videogame_record(update_request, repo)
-        return {"id": id}
-    except Exception as e:
-        print(e)
+app.include_router(update_videogame_record_router)
