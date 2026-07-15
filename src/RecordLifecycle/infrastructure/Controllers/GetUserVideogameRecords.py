@@ -1,8 +1,21 @@
-from pydantic import BaseModel
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetUserVideogameRecords.GetUserVideogameRecordsCommand import GetUserVideogameRecordsCommand
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetUserVideogameRecords.GetUserVideogameRecordsHandler import GetUserVideogameRecordsHandler
 from src.RecordLifecycle.domain.ValueObjects import AuthorId
 from ..Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
+from fastapi import APIRouter
+
+def get_user_videogame_records_endpoint(handler: GetUserVideogameRecordsHandler):
+    router = APIRouter()
+
+    @router.get("/VideogamesRecords/get_user_records/{author_id}")
+    async def get_user_records(author_id: str):
+        try:
+            records = get_user_videogame_records(author_id, handler.repository)
+            return records
+        except Exception as e:
+            print(e)
+
+    return router
     
 def get_user_videogame_records(author_id: str, repository: VideogameRecordRepositoryImpl):
     try:
