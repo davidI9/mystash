@@ -1,10 +1,10 @@
 from fastapi import FastAPI
-from .Controllers.GetVideogameRecord import get_videogame_record_by_id
+from .Controllers.GetVideogameRecord import create_get_videogame_record_by_id_endpoint
 from .Controllers.CreateVideogameRecord import create_videogame_record, CreateVidegameRecordRequest
 from .Controllers.DeleteVideogameRecord import delete_videogame_record_by_id
 from .Controllers.GetUserVideogameRecords import get_user_videogame_records
 from .Controllers.UpdateVideogameRecord import update_videogame_record, UpdateVideogameRecordRequest
-from .Persistance.VideogameMongodbRepo import VideogameMongodbRepo
+from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord.GetVideogameRecordHandler import GetVideogameRecordHandler
 from .Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
 from dotenv import load_dotenv
 import os
@@ -15,21 +15,19 @@ client: MongoClient
 database: Database
 
 load_dotenv()
+
 mongo_url = os.getenv("MONGODB_URL")
 client = MongoClient(mongo_url)
 database = client["base_de_datos"]
 
 repo = VideogameRecordRepositoryImpl(database)
+    
+get_videogame_record_handler = GetVideogameRecordHandler(repo)
+
+get_videogame_record_router = create_get_videogame_record_by_id_endpoint(get_videogame_record_handler)
 
 app = FastAPI()
-
-@app.get("/VideogamesRecords/get/{record_id}")
-async def get_by_id(record_id: str):
-    try:
-        record = get_videogame_record_by_id(record_id, repo)
-        return record
-    except Exception as e:
-        print(e)
+app.include_router(get_videogame_record_router)
 
 @app.get("/VideogamesRecords/get_user_records/{author_id}")
 async def get_user_records(author_id: str):
