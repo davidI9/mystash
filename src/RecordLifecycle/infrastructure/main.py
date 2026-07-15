@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from .Controllers.GetVideogameRecord import create_get_videogame_record_by_id_endpoint
-from .Controllers.CreateVideogameRecord import create_videogame_record, CreateVidegameRecordRequest
+from .Controllers.CreateVideogameRecord import create_videogame_record_endpoint
 from .Controllers.DeleteVideogameRecord import delete_videogame_record_by_id
 from .Controllers.GetUserVideogameRecords import get_user_videogame_records
 from .Controllers.UpdateVideogameRecord import update_videogame_record, UpdateVideogameRecordRequest
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord.GetVideogameRecordHandler import GetVideogameRecordHandler
+from src.RecordLifecycle.application.UseCases.VideogameRecord.CreateVideogameRecord.CreateVideogameRecordHandler import CreateVideogameRecordHandler
 from .Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
 from dotenv import load_dotenv
 import os
@@ -23,25 +24,20 @@ database = client["base_de_datos"]
 repo = VideogameRecordRepositoryImpl(database)
     
 get_videogame_record_handler = GetVideogameRecordHandler(repo)
-
 get_videogame_record_router = create_get_videogame_record_by_id_endpoint(get_videogame_record_handler)
+
+create_videogame_record_handler = CreateVideogameRecordHandler(repo)
+create_videogame_record_router = create_videogame_record_endpoint(create_videogame_record_handler)
 
 app = FastAPI()
 app.include_router(get_videogame_record_router)
+app.include_router(create_videogame_record_router)
 
 @app.get("/VideogamesRecords/get_user_records/{author_id}")
 async def get_user_records(author_id: str):
     try:
         records = get_user_videogame_records(author_id, repo)
         return records
-    except Exception as e:
-        print(e)
-
-@app.post("/VideogamesRecords/create")
-async def create_record(create_request: CreateVidegameRecordRequest):
-    try:
-        id = create_videogame_record(create_request, repo)
-        return {"id": id}
     except Exception as e:
         print(e)
 

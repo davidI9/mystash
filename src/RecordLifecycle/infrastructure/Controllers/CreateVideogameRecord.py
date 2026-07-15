@@ -8,6 +8,7 @@ from src.RecordLifecycle.domain.ValueObjects.VideogameDescription import Videoga
 from src.RecordLifecycle.domain.ValueObjects.VideogamePlaytime import VideogamePlaytime
 from src.RecordLifecycle.domain.ValueObjects.VideogameRating import VideogameRating
 from ..Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
+from fastapi import APIRouter
 from pydantic import BaseModel
 import uuid
 
@@ -18,15 +19,26 @@ class CreateVidegameRecordRequest(BaseModel):
     description: str
     playtime: int
     rating: float | int
+    
+def create_videogame_record_endpoint(handler: CreateVideogameRecordHandler):
+    router = APIRouter()
 
-def create_videogame_record(create_request: CreateVidegameRecordRequest, repository: VideogameRecordRepositoryImpl):
+    @router.post("/VideogamesRecords/create")
+    async def create_record(create_request: CreateVidegameRecordRequest):
+        try:
+            id = create_videogame_record(create_request, handler)
+            return {"id": id}
+        except Exception as e:
+            print(e)
+
+    return router
+
+def create_videogame_record(create_request: CreateVidegameRecordRequest, handler: CreateVideogameRecordHandler):
     try:
         command = CreateVideogameRecordCommand(AuthorId(create_request.author), RecordTitle(create_request.title), CreationDate(create_request.date), VideogameDescription(create_request.description), VideogamePlaytime(create_request.playtime), VideogameRating(create_request.rating), RecordId(str(uuid.UUID(version=4))))
     except Exception as e:
         print(f"An error has occurred while creating the command: {e}")
         return None
-
-    handler = CreateVideogameRecordHandler(repository)
     
     handler.handle(command)
     return command.id
