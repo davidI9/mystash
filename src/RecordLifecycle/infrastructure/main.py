@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from typing import Any
+from fastapi import FastAPI, APIRouter
 from .Controllers.GetVideogameRecord import create_get_videogame_record_by_id_endpoint
 from .Controllers.CreateVideogameRecord import create_videogame_record_endpoint
 from .Controllers.DeleteVideogameRecord import delete_videogame_record_by_id_endpoint
@@ -15,8 +16,8 @@ import os
 from pymongo import MongoClient
 from pymongo.database import Database
 
-client: MongoClient
-database: Database
+client: MongoClient[dict[str, Any]]
+database: Database[dict[str, Any]]
 
 load_dotenv()
 
@@ -41,9 +42,11 @@ get_user_videogame_records_router = get_user_videogame_records_endpoint(get_user
 update_videogame_record_handler = UpdateVideogameRecordHandler(repo)
 update_videogame_record_router = update_videogame_record_endpoint(update_videogame_record_handler)
 
+videogame_record_router = APIRouter(prefix="/VideogamesRecords", tags=["VideogamesRecordsRoutes"])
 app = FastAPI()
-app.include_router(get_videogame_record_router)
-app.include_router(create_videogame_record_router)
-app.include_router(delete_videogame_record_router)
-app.include_router(get_user_videogame_records_router)
-app.include_router(update_videogame_record_router)
+videogame_record_router.include_router(get_videogame_record_router)
+videogame_record_router.include_router(create_videogame_record_router)
+videogame_record_router.include_router(delete_videogame_record_router)
+videogame_record_router.include_router(get_user_videogame_records_router)
+videogame_record_router.include_router(update_videogame_record_router)
+app.include_router(videogame_record_router)

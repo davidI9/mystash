@@ -22,7 +22,7 @@ class UpdateVideogameRecordRequest(BaseModel):
 def update_videogame_record_endpoint(handler: UpdateVideogameRecordHandler):
     router = APIRouter()
 
-    @router.put("/VideogamesRecords/update")
+    @router.post("/update_record")
     async def update_record(update_request: UpdateVideogameRecordRequest):
         try:
             id = update_videogame_record(update_request, handler)

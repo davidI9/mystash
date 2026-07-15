@@ -7,7 +7,7 @@ from fastapi import APIRouter
 def create_get_videogame_record_by_id_endpoint(handler: GetVideogameRecordHandler):
     router = APIRouter()
 
-    @router.get("/VideogamesRecords/get/{record_id}")
+    @router.get("/get/{record_id}")
     async def get_by_id(record_id: str):
         try:
             record = get_videogame_record_by_id(record_id, handler)

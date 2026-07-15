@@ -7,7 +7,7 @@ from fastapi import APIRouter
 def get_user_videogame_records_endpoint(handler: GetUserVideogameRecordsHandler):
     router = APIRouter()
 
-    @router.get("/VideogamesRecords/get_user_records/{author_id}")
+    @router.get("/get_user_records/{author_id}")
     async def get_user_records(author_id: str):
         try:
             records = get_user_videogame_records(author_id, handler)

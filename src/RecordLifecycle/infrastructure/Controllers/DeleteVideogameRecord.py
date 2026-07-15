@@ -6,7 +6,7 @@ from fastapi import APIRouter
 def delete_videogame_record_by_id_endpoint(handler: DeleteVideogameRecordHandler):
     router = APIRouter()
 
-    @router.delete("/VideogamesRecords/delete/{record_id}")
+    @router.delete("/delete_record/{record_id}")
     async def delete_record(record_id: str):
         try:
             delete_videogame_record_by_id(record_id, handler)

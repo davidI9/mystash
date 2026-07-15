@@ -22,7 +22,7 @@ class CreateVidegameRecordRequest(BaseModel):
 def create_videogame_record_endpoint(handler: CreateVideogameRecordHandler):
     router = APIRouter()
 
-    @router.post("/VideogamesRecords/create")
+    @router.post("/create_record")
     async def create_record(create_request: CreateVidegameRecordRequest):
         try:
             id = create_videogame_record(create_request, handler)
