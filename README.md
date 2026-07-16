@@ -1,6 +1,36 @@
-Another chapter of clean arquitechture learning. This is a demo with just one functionabillity and no front of a record managing backend, the ts rrss uses.
-There are 3 endpoints; a get, a post and a delete. Intend to develop extra modules in the future and add some other contexts to enable the creations of users, also making a lot of changes on security manage and the endpoints usage.
+# mystash
 
-To setup I recommend to create a virtual envirorment with python's venv, installing the requirements, setting up mongo in the port 27017 (ussually the predefined one) and then loading fastapi run dev on the VideogameRecordApi.py .
+This project is coded entirely by me
 
-Have a lot to learn, love the feedback!
+I am using it as a side project to learn **Clean Architecture** and **DDD** good practices
+
+The AI larping is limited to: gemini, how do I...? and copilot's auto-completion :)
+
+If you want better and more AI larping let me first undestand the basics please, I hate minmaxing
+
+## Stack
+
+Hi people that gives money to people who code!
+I am using **Python** with **Fastapi** for the backend 👻
+
+For packet managing I am using **uv**, and for tests is **pytest**
+
+Thank you for the interest!
+
+## Explanation
+
+This is for now just a Backend which lets de user create records. This records are currently just for Videogames. The objective of this is to have a place where share your interests and register different activities.
+I am planing to add music, films, series, workouts, books, etc, in the future.
+
+## Usage
+
+This code is and will be for now open, if you want to try by yourself: 
+
+--> clone the repo 
+
+--> create a docker-compose.yml file with a mongo image and the dockerfile image 
+
+--> throw ```docker compose up --build``` in the terminal and it'll make it work!
+
+
+love yall <3
