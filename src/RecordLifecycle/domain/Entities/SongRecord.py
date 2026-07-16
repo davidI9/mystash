@@ -1,4 +1,3 @@
-from .Record import Record
 from dataclasses import dataclass
 from ..ValueObjects.RecordTitle import RecordTitle
 from ..ValueObjects.CreationDate import CreationDate
@@ -10,13 +9,13 @@ from ..ValueObjects.SongDuration import SongDuration
 
 
 @dataclass
-class SongRecord(Record):
+class SongRecord():
     author: AuthorId 
     song_title: RecordTitle
     date: CreationDate
     id: RecordId
     artist: ArtistName
-    genre: GenreName
+    main_genre: GenreName
     duration: SongDuration
     album_id: RecordId | None = None    
     
@@ -66,13 +65,13 @@ class SongRecord(Record):
     def get_album(self):
         return self.album
 
-    def set_genre(self, new_genre):
+    def set_main_genre(self, new_genre):
         if not isinstance(new_genre, GenreName):
             raise TypeError("The new genre must be a GenreName type object.")
-        self.genre = new_genre
+        self.main_genre = new_genre
 
-    def get_genre(self):
-        return self.genre
+    def get_main_genre(self):
+        return self.main_genre
 
     def set_duration(self, new_duration):
         if not isinstance(new_duration, SongDuration):
