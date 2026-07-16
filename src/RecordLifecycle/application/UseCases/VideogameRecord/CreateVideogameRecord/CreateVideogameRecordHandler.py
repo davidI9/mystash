@@ -8,7 +8,7 @@ class CreateVideogameRecordHandler:
         self.repository = repository
     
     def handle(self, command: CreateVideogameRecordCommand):        
-        self.VideogameRecord = VideogameRecord(command.author, command.title, command.date, command.id, command.description, command.rating, command.playtime)
+        self.VideogameRecord = VideogameRecord(command.author, command.game_title, command.date, command.id, command.description, command.rating, command.playtime)
 
         try:
             self.repository.save(self.VideogameRecord)

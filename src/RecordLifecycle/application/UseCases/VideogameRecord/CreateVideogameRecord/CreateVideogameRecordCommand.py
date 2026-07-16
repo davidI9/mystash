@@ -4,7 +4,7 @@ from src.RecordLifecycle.domain.ValueObjects import CreationDate, RecordId, Auth
 @dataclass(frozen=True)
 class CreateVideogameRecordCommand:
     author: AuthorId
-    title: RecordTitle
+    game_title: RecordTitle
     date: CreationDate
     description: VideogameDescription
     rating: VideogameRating

@@ -43,10 +43,11 @@ update_videogame_record_handler = UpdateVideogameRecordHandler(repo)
 update_videogame_record_router = update_videogame_record_endpoint(update_videogame_record_handler)
 
 videogame_record_router = APIRouter(prefix="/VideogamesRecords", tags=["VideogamesRecordsRoutes"])
-app = FastAPI()
 videogame_record_router.include_router(get_videogame_record_router)
 videogame_record_router.include_router(create_videogame_record_router)
 videogame_record_router.include_router(delete_videogame_record_router)
 videogame_record_router.include_router(get_user_videogame_records_router)
 videogame_record_router.include_router(update_videogame_record_router)
+
+app = FastAPI()
 app.include_router(videogame_record_router)
