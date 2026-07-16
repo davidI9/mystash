@@ -14,10 +14,10 @@ class UpdateVideogameRecordRequest(BaseModel):
     id: str
     author_id: str
     title: str
-    description: str
-    playtime: int
-    rating: float | int
     date: str
+    description: str
+    rating: float | int
+    playtime: int
     
 def update_videogame_record_endpoint(handler: UpdateVideogameRecordHandler):
     router = APIRouter()

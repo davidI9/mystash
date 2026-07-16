@@ -7,6 +7,6 @@ class CreateVideogameRecordCommand:
     title: RecordTitle
     date: CreationDate
     description: VideogameDescription
-    playtime: VideogamePlaytime
     rating: VideogameRating
+    playtime: VideogamePlaytime
     id: RecordId

@@ -9,10 +9,10 @@ from src.RecordLifecycle.domain.ValueObjects.CreationDate import CreationDate
 
 @dataclass(frozen=True)
 class UpdateVideogameRecordCommand: 
-    id: RecordId
-    author_id: AuthorId
+    author: AuthorId
     title: RecordTitle
-    description: VideogameDescription
-    playtime: VideogamePlaytime
-    rating: VideogameRating 
     date: CreationDate
+    description: VideogameDescription
+    rating: VideogameRating
+    playtime: VideogamePlaytime
+    id: RecordId

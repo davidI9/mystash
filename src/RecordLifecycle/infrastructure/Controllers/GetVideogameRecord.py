@@ -1,7 +1,6 @@
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord.GetVideogameRecordCommand import GetVideogameRecordCommand
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetVideogameRecord.GetVideogameRecordHandler import GetVideogameRecordHandler
 from src.RecordLifecycle.domain.ValueObjects import RecordId
-from ..main import repo
 from fastapi import APIRouter
 
 def create_get_videogame_record_by_id_endpoint(handler: GetVideogameRecordHandler):
