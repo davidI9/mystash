@@ -614,6 +614,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fastapi", extra = ["standard"] },
+    { name = "httpx" },
     { name = "mypy" },
     { name = "pydantic" },
     { name = "pymongo" },
@@ -625,6 +626,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", extras = ["standard"], specifier = "==0.116.1" },
+    { name = "httpx", specifier = ">=0.28.1" },
     { name = "mypy", specifier = ">=2.3.0" },
     { name = "pydantic", specifier = "==2.11.7" },
     { name = "pymongo", specifier = "==4.14.0" },

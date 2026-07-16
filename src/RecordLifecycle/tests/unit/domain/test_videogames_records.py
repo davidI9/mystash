@@ -1,11 +1,11 @@
-from ..domain.Entities.VideogameRecord import VideogameRecord
-from ..domain.ValueObjects import RecordTitle
-from ..domain.ValueObjects import CreationDate
-from ..domain.ValueObjects import VideogameDescription
-from ..domain.ValueObjects import VideogameRating
-from ..domain.ValueObjects import VideogamePlaytime
-from ..domain.ValueObjects import RecordId
-from ..domain.ValueObjects import AuthorId
+from src.RecordLifecycle.domain.Entities.VideogameRecord import VideogameRecord
+from src.RecordLifecycle.domain.ValueObjects import RecordTitle
+from src.RecordLifecycle.domain.ValueObjects import CreationDate
+from src.RecordLifecycle.domain.ValueObjects import VideogameDescription
+from src.RecordLifecycle.domain.ValueObjects import VideogameRating
+from src.RecordLifecycle.domain.ValueObjects import VideogamePlaytime
+from src.RecordLifecycle.domain.ValueObjects import RecordId
+from src.RecordLifecycle.domain.ValueObjects import AuthorId
 
 def test_videogames_records():
     #arrange
