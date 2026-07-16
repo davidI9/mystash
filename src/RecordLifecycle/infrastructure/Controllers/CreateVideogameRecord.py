@@ -34,7 +34,7 @@ def create_videogame_record_endpoint(handler: CreateVideogameRecordHandler):
 
 def create_videogame_record(create_request: CreateVidegameRecordRequest, handler: CreateVideogameRecordHandler):
     try:
-        command = CreateVideogameRecordCommand(AuthorId(create_request.author_id), RecordTitle(create_request.game_title), CreationDate(create_request.date), VideogameDescription(create_request.description), VideogamePlaytime(create_request.playtime), VideogameRating(create_request.rating), RecordId(str(uuid.uuid4())))
+        command = CreateVideogameRecordCommand(AuthorId(create_request.author_id), RecordTitle(create_request.game_title), CreationDate(create_request.date), VideogameDescription(create_request.description), VideogameRating(create_request.rating), VideogamePlaytime(create_request.playtime), RecordId(str(uuid.uuid4())))
     except Exception as e:
         print(f"An error has occurred while creating the command: {e}")
         return None

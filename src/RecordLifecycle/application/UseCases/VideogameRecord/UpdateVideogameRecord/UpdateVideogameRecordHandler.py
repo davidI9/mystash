@@ -7,7 +7,7 @@ class UpdateVideogameRecordHandler:
         self.repository = repository
 
     def handle(self, command: UpdateVideogameRecordCommand):
-        self.record = VideogameRecord(command.author_id, command.game_title, command.date, command.id, command.description, command.rating, command.playtime)
+        self.record = VideogameRecord(command.author, command.game_title, command.date, command.id, command.description, command.rating, command.playtime)
         try:
             self.repository.update_record(self.record)
         except Exception as e:

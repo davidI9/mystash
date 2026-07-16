@@ -34,7 +34,7 @@ def update_videogame_record_endpoint(handler: UpdateVideogameRecordHandler):
 
 def update_videogame_record(update_request: UpdateVideogameRecordRequest, handler: UpdateVideogameRecordHandler):
     try:
-        command = UpdateVideogameRecordCommand(RecordId(update_request.id), AuthorId(update_request.author_id), RecordTitle(update_request.game_title), VideogameDescription(update_request.description), VideogamePlaytime(update_request.playtime), VideogameRating(update_request.rating), CreationDate(update_request.date))
+        command = UpdateVideogameRecordCommand(AuthorId(update_request.author_id), RecordTitle(update_request.game_title), CreationDate(update_request.date), VideogameDescription(update_request.description), VideogameRating(update_request.rating), VideogamePlaytime(update_request.playtime), RecordId(update_request.id))
     except Exception as e:
         print(f"An error has occurred while creating the command: {e}")
         return None

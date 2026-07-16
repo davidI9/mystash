@@ -14,7 +14,7 @@ class VideogameMongodbRepo:
                 self.videogame_records.insert_one({
                     "author_id": str(record.get_author()),
                     "record_id": str(record.get_id()),
-                    "title": str(record.get_title()),
+                    "title": str(record.get_game_title()),
                     "description": str(record.get_description()),
                     "creation_date": str(record.get_date()),
                     "rating": float(record.get_rating()),
@@ -62,7 +62,7 @@ class VideogameMongodbRepo:
                 self.videogame_records.update_one(
                     {"record_id": str(record.get_id()), "author_id": str(record.get_author())},
                     {"$set": {
-                        "title": str(record.get_title()),
+                        "title": str(record.get_game_title()),
                         "description": str(record.get_description()),
                         "creation_date": str(record.get_date()),
                         "rating": float(record.get_rating()),

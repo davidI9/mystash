@@ -41,14 +41,6 @@ class SongRecord():
     def get_date(self):
         return self.date
 
-    def set_title(self, new_title):
-        if not isinstance(new_title, RecordTitle):
-            raise TypeError("The new title must be a RecordTitle type object.")
-        self.title = new_title
-
-    def get_title(self):
-        return self.title
-
     def set_artist(self, new_artist):
         if not isinstance(new_artist, ArtistName):
             raise TypeError("The new artist must be an ArtistName type object.")
