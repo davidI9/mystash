@@ -1,14 +1,15 @@
 from .CreateSongRecordCommand import CreateSongRecordCommand
 from src.RecordLifecycle.domain.Entities.SongRecord import SongRecord
+from src.RecordLifecycle.domain.Repositories.SongRecordRepository import SongRecordRepository
 
 class CreateSongRecordHandler:
-    def __init__(self, repository):
+    def __init__(self, repository: SongRecordRepository):
         self.repository = repository
 
     def handle(self, command: CreateSongRecordCommand):
         self.record = SongRecord(command.author, command.song_title, command.date, command.id, command.artist, command.main_genre, command.duration, command.album_id)
         
         try:
-            self.repository.save_record(self.record)
+            self.repository.save(self.record)
         except Exception as e:
             print(f"An error has ocurred while saving the record: {e}")
