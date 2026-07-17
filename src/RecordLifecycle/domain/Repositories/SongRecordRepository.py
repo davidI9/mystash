@@ -26,5 +26,5 @@ class SongRecordRepository(ABC):
         pass
     
     @abstractmethod
-    def get_album_duration(self, album_id: RecordId):
+    def get_album_songs(self, album_id: RecordId):
         pass
