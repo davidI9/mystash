@@ -1,4 +1,4 @@
-from .DeleteSongeRecordCommand import DeleteSongRecordCommand
+from .DeleteSongRecordCommand import DeleteSongRecordCommand
 from src.RecordLifecycle.domain.Repositories.SongRecordRepository import SongRecordRepository
 
 class DeleteSongRecordHandler:
