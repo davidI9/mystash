@@ -38,8 +38,8 @@ class GetUserAlbumRecordsHandler:
                     result.append(AlbumRecordResultItem(AuthorId(record.author), RecordTitle(record.album_title), CreationDate(record.date), RecordId(record.id), ArtistName(record.artist), GenreName(record.main_genre), AlbumDuration(album_songs.get_total_duration()), SongNumber(album_songs.get_song_count())))
                 except Exception as e:
                     print(f"Error occurred while fetching album songs for record {record.id}: {e}")
-                    continue
+                    raise ValueError(f"Error occurred while fetching album songs for record {record.id}: {e}")
             return result
         except Exception as e:
             print(f"An error has occurred while retrieving the records: {e}")
-            return []
+            raise ValueError(f"An error has occurred while retrieving the records: {e}")
