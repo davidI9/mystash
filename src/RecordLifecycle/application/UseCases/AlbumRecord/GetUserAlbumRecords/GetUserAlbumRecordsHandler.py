@@ -32,6 +32,7 @@ class GetUserAlbumRecordsHandler:
         try:
             records = self.album_repository.get_user_records(command.author_id)
             result = []
+            
             for record in records:
                 try:
                     album_songs = TrackList(self.song_repository.get_album_songs(record.id))
@@ -39,7 +40,9 @@ class GetUserAlbumRecordsHandler:
                 except Exception as e:
                     print(f"Error occurred while fetching album songs for record {record.id}: {e}")
                     raise ValueError(f"Error occurred while fetching album songs for record {record.id}: {e}")
+                
             return result
+        
         except Exception as e:
             print(f"An error has occurred while retrieving the records: {e}")
             raise ValueError(f"An error has occurred while retrieving the records: {e}")
