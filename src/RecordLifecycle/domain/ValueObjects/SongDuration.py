@@ -6,5 +6,14 @@ class SongDuration:
             raise ValueError("Duration must be a positive integer between 0 and 3600.")
         self.duration = duration
 
-    def get_duration(self):
+    def __eq__(self, other):
+        if isinstance(other, SongDuration):
+            return self.duration == other.duration
+        return False
+    
+    def __str__(self):  
+        return str(self.duration)
+    
+    @property
+    def _duration(self):
         return self.duration
