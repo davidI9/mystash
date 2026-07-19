@@ -1,6 +1,6 @@
 from typing import Any
 from fastapi import FastAPI, APIRouter
-from .Controllers.VideogameRecords.GetVideogameRecord import create_get_videogame_record_by_id_endpoint
+from .Controllers.VideogameRecords.GetVideogameRecord import get_videogame_record_endpoint
 from .Controllers.VideogameRecords.CreateVideogameRecord import create_videogame_record_endpoint
 from .Controllers.VideogameRecords.DeleteVideogameRecord import delete_videogame_record_by_id_endpoint
 from .Controllers.VideogameRecords.GetUserVideogameRecords import get_user_videogame_records_endpoint
@@ -28,7 +28,7 @@ database = client["base_de_datos"]
 repo = VideogameRecordRepositoryImpl(database)
     
 get_videogame_record_handler = GetVideogameRecordHandler(repo)
-get_videogame_record_router = create_get_videogame_record_by_id_endpoint(get_videogame_record_handler)
+get_videogame_record_router = get_videogame_record_endpoint(get_videogame_record_handler)
 
 create_videogame_record_handler = CreateVideogameRecordHandler(repo)
 create_videogame_record_router = create_videogame_record_endpoint(create_videogame_record_handler)
