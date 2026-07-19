@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
 from src.RecordLifecycle.application.UseCases.SongRecord.DeleteSongRecord.DeleteSongRecordCommand import DeleteSongRecordCommand
 from src.RecordLifecycle.application.UseCases.SongRecord.DeleteSongRecord.DeleteSongRecordHandler import DeleteSongRecordHandler
 from src.RecordLifecycle.domain.ValueObjects.RecordId import RecordId

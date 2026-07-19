@@ -1,7 +1,6 @@
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetUserVideogameRecords.GetUserVideogameRecordsCommand import GetUserVideogameRecordsCommand
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetUserVideogameRecords.GetUserVideogameRecordsHandler import GetUserVideogameRecordsHandler
 from src.RecordLifecycle.domain.ValueObjects import AuthorId
-from ...Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
 from fastapi import APIRouter
 
 def get_user_videogame_records_endpoint(handler: GetUserVideogameRecordsHandler):
