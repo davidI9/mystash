@@ -35,16 +35,7 @@ def update_song_record_endpoint(handler: UpdateSongRecordHandler):
 
 def update_song_record(update_request: UpdateSongRecordRequest, handler: UpdateSongRecordHandler):
     try:
-        command = UpdateSongRecordCommand(
-            AuthorId(update_request.author),
-            RecordTitle(update_request.song_title),
-            CreationDate(update_request.date),
-            RecordId(update_request.id),
-            ArtistName(update_request.artist),
-            GenreName(update_request.main_genre),
-            SongDuration(update_request.duration),
-            RecordId(update_request.album_id) if update_request.album_id else None
-        )
+        command = UpdateSongRecordCommand(AuthorId(update_request.author), RecordTitle(update_request.song_title), CreationDate(update_request.date), RecordId(update_request.id), ArtistName(update_request.artist), GenreName(update_request.main_genre), SongDuration(update_request.duration), RecordId(update_request.album_id) if update_request.album_id else None)
     except Exception as e:
         print(f"An error has occurred while creating the command: {e}")
         return None
