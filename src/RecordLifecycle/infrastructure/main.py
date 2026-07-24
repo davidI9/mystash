@@ -1,5 +1,10 @@
 from typing import Any
 from fastapi import FastAPI, APIRouter
+from dotenv import load_dotenv
+import os
+from pymongo import MongoClient
+from pymongo.database import Database
+
 from .Controllers.VideogameRecords.GetVideogameRecord import get_videogame_record_endpoint
 from .Controllers.VideogameRecords.CreateVideogameRecord import create_videogame_record_endpoint
 from .Controllers.VideogameRecords.DeleteVideogameRecord import delete_videogame_record_by_id_endpoint
@@ -11,35 +16,48 @@ from src.RecordLifecycle.application.UseCases.VideogameRecord.DeleteVideogameRec
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetUserVideogameRecords.GetUserVideogameRecordsHandler import GetUserVideogameRecordsHandler
 from src.RecordLifecycle.application.UseCases.VideogameRecord.UpdateVideogameRecord.UpdateVideogameRecordHandler import UpdateVideogameRecordHandler
 from .Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
-from dotenv import load_dotenv
-import os
-from pymongo import MongoClient
-from pymongo.database import Database
 
-client: MongoClient[dict[str, Any]]
-database: Database[dict[str, Any]]
+from .Controllers.SongRecords.GetSongRecord import get_song_record_endpoint
+from .Controllers.SongRecords.CreateSongRecord import create_song_record_endpoint
+from .Controllers.SongRecords.DeleteSongRecord import delete_song_record_endpoint
+from .Controllers.SongRecords.GetUserSongRecords import get_user_song_records_endpoint
+from .Controllers.SongRecords.UpdateSongRecord import update_song_record_endpoint
+from src.RecordLifecycle.application.UseCases.SongRecord.GetSongRecord.GetSongRecordHandler import GetSongRecordHandler
+from src.RecordLifecycle.application.UseCases.SongRecord.CreateSongRecord.CreateSongRecordHandler import CreateSongRecordHandler
+from src.RecordLifecycle.application.UseCases.SongRecord.DeleteSongRecord.DeleteSongRecordHandler import DeleteSongRecordHandler
+from src.RecordLifecycle.application.UseCases.SongRecord.GetUserSongRecords.GetUserSongRecordsHandler import GetUserSongRecordsHandler
+from src.RecordLifecycle.application.UseCases.SongRecord.UpdateSongRecord.UpdateSongRecordHandler import UpdateSongRecordHandler
+from .Persistance.SongRecordRepositoryImpl import SongRecordRepositoryImpl
+
+videogame_client: MongoClient[dict[str, Any]]
+song_client: MongoClient[dict[str, Any]]
+videogame_database: Database[dict[str, Any]]
+song_database: Database[dict[str, Any]]
 
 load_dotenv()
 
 mongo_url = os.getenv("MONGODB_URL")
 client = MongoClient(mongo_url)
-database = client["base_de_datos"]
 
-repo = VideogameRecordRepositoryImpl(database)
-    
-get_videogame_record_handler = GetVideogameRecordHandler(repo)
+videogame_database = client["base_de_datos"]
+song_database = client["song_database"]
+
+videogame_repo = VideogameRecordRepositoryImpl(videogame_database)
+song_repo = SongRecordRepositoryImpl(song_database)
+
+get_videogame_record_handler = GetVideogameRecordHandler(videogame_repo)
 get_videogame_record_router = get_videogame_record_endpoint(get_videogame_record_handler)
 
-create_videogame_record_handler = CreateVideogameRecordHandler(repo)
+create_videogame_record_handler = CreateVideogameRecordHandler(videogame_repo)
 create_videogame_record_router = create_videogame_record_endpoint(create_videogame_record_handler)
 
-delete_videogame_record_handler = DeleteVideogameRecordHandler(repo)
+delete_videogame_record_handler = DeleteVideogameRecordHandler(videogame_repo)
 delete_videogame_record_router = delete_videogame_record_by_id_endpoint(delete_videogame_record_handler)
 
-get_user_videogame_records_handler = GetUserVideogameRecordsHandler(repo)
+get_user_videogame_records_handler = GetUserVideogameRecordsHandler(videogame_repo)
 get_user_videogame_records_router = get_user_videogame_records_endpoint(get_user_videogame_records_handler)
 
-update_videogame_record_handler = UpdateVideogameRecordHandler(repo)
+update_videogame_record_handler = UpdateVideogameRecordHandler(videogame_repo)
 update_videogame_record_router = update_videogame_record_endpoint(update_videogame_record_handler)
 
 videogame_record_router = APIRouter(prefix="/VideogamesRecords", tags=["VideogamesRecordsRoutes"])
@@ -49,5 +67,28 @@ videogame_record_router.include_router(delete_videogame_record_router)
 videogame_record_router.include_router(get_user_videogame_records_router)
 videogame_record_router.include_router(update_videogame_record_router)
 
+get_song_record_handler = GetSongRecordHandler(song_repo)
+get_song_record_router = get_song_record_endpoint(get_song_record_handler)
+
+create_song_record_handler = CreateSongRecordHandler(song_repo)
+create_song_record_router = create_song_record_endpoint(create_song_record_handler)
+
+delete_song_record_handler = DeleteSongRecordHandler(song_repo)
+delete_song_record_router = delete_song_record_endpoint(delete_song_record_handler)
+
+get_user_song_records_handler = GetUserSongRecordsHandler(song_repo)
+get_user_song_records_router = get_user_song_records_endpoint(get_user_song_records_handler)
+
+update_song_record_handler = UpdateSongRecordHandler(song_repo)
+update_song_record_router = update_song_record_endpoint(update_song_record_handler)
+
+song_record_router = APIRouter(prefix="/SongRecords", tags=["SongRecordsRoutes"])
+song_record_router.include_router(get_song_record_router)
+song_record_router.include_router(create_song_record_router)
+song_record_router.include_router(delete_song_record_router)
+song_record_router.include_router(get_user_song_records_router)
+song_record_router.include_router(update_song_record_router)
+
 app = FastAPI()
 app.include_router(videogame_record_router)
+app.include_router(song_record_router)
