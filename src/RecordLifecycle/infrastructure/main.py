@@ -5,6 +5,8 @@ import os
 from pymongo import MongoClient
 from pymongo.database import Database
 
+# VIDEOGAME RECORDS IMPORTS
+
 from .Controllers.VideogameRecords.GetVideogameRecord import get_videogame_record_endpoint
 from .Controllers.VideogameRecords.CreateVideogameRecord import create_videogame_record_endpoint
 from .Controllers.VideogameRecords.DeleteVideogameRecord import delete_videogame_record_by_id_endpoint
@@ -16,6 +18,8 @@ from src.RecordLifecycle.application.UseCases.VideogameRecord.DeleteVideogameRec
 from src.RecordLifecycle.application.UseCases.VideogameRecord.GetUserVideogameRecords.GetUserVideogameRecordsHandler import GetUserVideogameRecordsHandler
 from src.RecordLifecycle.application.UseCases.VideogameRecord.UpdateVideogameRecord.UpdateVideogameRecordHandler import UpdateVideogameRecordHandler
 from .Persistance.VideogameRecordRepositoryImpl import VideogameRecordRepositoryImpl
+
+# SONG RECORDS IMPORTS
 
 from .Controllers.SongRecords.GetSongRecord import get_song_record_endpoint
 from .Controllers.SongRecords.CreateSongRecord import create_song_record_endpoint
@@ -29,10 +33,26 @@ from src.RecordLifecycle.application.UseCases.SongRecord.GetUserSongRecords.GetU
 from src.RecordLifecycle.application.UseCases.SongRecord.UpdateSongRecord.UpdateSongRecordHandler import UpdateSongRecordHandler
 from .Persistance.SongRecordRepositoryImpl import SongRecordRepositoryImpl
 
+# ALBUM RECORDS IMPORTS
+
+from .Controllers.AlbumRecords.GetAlbumRecord import get_album_record_endpoint
+from .Controllers.AlbumRecords.CreateAlbumRecord import create_album_record_endpoint
+from .Controllers.AlbumRecords.DeleteAlbumRecord import delete_album_endpoint
+from .Controllers.AlbumRecords.GetUserAlbumRecords import get_user_album_records_endpoint
+from .Controllers.AlbumRecords.UpdateAlbumRecord import update_album_record_endpoint
+from src.RecordLifecycle.application.UseCases.AlbumRecord.GetAlbumRecord.GetAlbumRecordHandler import GetAlbumRecordHandler
+from src.RecordLifecycle.application.UseCases.AlbumRecord.CreateAlbumRecord.CreateAlbumRecordHandler import CreateAlbumRecordHandler
+from src.RecordLifecycle.application.UseCases.AlbumRecord.DeleteAlbumRecord.DeleteAlbumRecordHandler import DeleteAlbumRecordHandler
+from src.RecordLifecycle.application.UseCases.AlbumRecord.GetUserAlbumRecords.GetUserAlbumRecordsHandler import GetUserAlbumRecordsHandler
+from src.RecordLifecycle.application.UseCases.AlbumRecord.UpdateAlbumRecord.UpdateAlbumRecordHandler import UpdateAlbumRecordHandler
+from .Persistance.AlbumRecordRepositoryImpl import AlbumRecordRepositoryImpl
+
 videogame_client: MongoClient[dict[str, Any]]
 song_client: MongoClient[dict[str, Any]]
+album_client: MongoClient[dict[str, Any]]
 videogame_database: Database[dict[str, Any]]
 song_database: Database[dict[str, Any]]
+album_database: Database[dict[str, Any]]
 
 load_dotenv()
 
@@ -41,9 +61,14 @@ client = MongoClient(mongo_url)
 
 videogame_database = client["base_de_datos"]
 song_database = client["song_database"]
+album_database = client["album_database"]
 
 videogame_repo = VideogameRecordRepositoryImpl(videogame_database)
 song_repo = SongRecordRepositoryImpl(song_database)
+album_repo = AlbumRecordRepositoryImpl(album_database)
+###########################
+# VIDEOGAME RECORDS ROUTES
+###########################
 
 get_videogame_record_handler = GetVideogameRecordHandler(videogame_repo)
 get_videogame_record_router = get_videogame_record_endpoint(get_videogame_record_handler)
@@ -67,6 +92,10 @@ videogame_record_router.include_router(delete_videogame_record_router)
 videogame_record_router.include_router(get_user_videogame_records_router)
 videogame_record_router.include_router(update_videogame_record_router)
 
+###########################
+# SONG RECORDS ROUTES
+###########################
+
 get_song_record_handler = GetSongRecordHandler(song_repo)
 get_song_record_router = get_song_record_endpoint(get_song_record_handler)
 
@@ -89,6 +118,33 @@ song_record_router.include_router(delete_song_record_router)
 song_record_router.include_router(get_user_song_records_router)
 song_record_router.include_router(update_song_record_router)
 
+###########################
+# ALBUM RECORDS ROUTES
+###########################
+
+get_album_record_handler = GetAlbumRecordHandler(album_repo)
+get_album_record_router = get_album_record_endpoint(get_album_record_handler)
+
+create_album_record_handler = CreateAlbumRecordHandler(album_repo)
+create_album_record_router = create_album_record_endpoint(create_album_record_handler)
+
+delete_album_record_handler = DeleteAlbumRecordHandler(album_repo)
+delete_album_record_router = delete_album_endpoint(delete_album_record_handler)
+
+get_user_album_records_handler = GetUserAlbumRecordsHandler(album_repo)
+get_user_album_records_router = get_user_album_records_endpoint(get_user_album_records_handler)
+
+update_album_record_handler = UpdateAlbumRecordHandler(album_repo)
+update_album_record_router = update_album_record_endpoint(update_album_record_handler)
+
+album_record_router = APIRouter(prefix="/AlbumRecords", tags=["AlbumRecordsRoutes"])
+album_record_router.include_router(get_album_record_router)
+album_record_router.include_router(create_album_record_router)
+album_record_router.include_router(delete_album_record_router)
+album_record_router.include_router(get_user_album_records_router)
+album_record_router.include_router(update_album_record_router)
+
 app = FastAPI()
 app.include_router(videogame_record_router)
 app.include_router(song_record_router)
+app.include_router(album_record_router)
