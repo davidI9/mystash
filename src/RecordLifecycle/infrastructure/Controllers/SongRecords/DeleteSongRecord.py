@@ -3,7 +3,7 @@ from src.RecordLifecycle.application.UseCases.SongRecord.DeleteSongRecord.Delete
 from src.RecordLifecycle.application.UseCases.SongRecord.DeleteSongRecord.DeleteSongRecordHandler import DeleteSongRecordHandler
 from src.RecordLifecycle.domain.ValueObjects.RecordId import RecordId
 
-def create_delete_song_record_endpoint(handler: DeleteSongRecordHandler):
+def delete_song_record_endpoint(handler: DeleteSongRecordHandler):
     router = APIRouter()
 
     @router.delete("/delete_record/{record_id}")
