@@ -121,7 +121,7 @@ song_record_router.include_router(update_song_record_router)
 # ALBUM RECORDS ROUTES
 ###########################
 
-get_album_record_handler = GetAlbumRecordHandler(album_repo)
+get_album_record_handler = GetAlbumRecordHandler(album_repo, song_repo)
 get_album_record_router = get_album_record_endpoint(get_album_record_handler)
 
 create_album_record_handler = CreateAlbumRecordHandler(album_repo)
@@ -130,7 +130,7 @@ create_album_record_router = create_album_record_endpoint(create_album_record_ha
 delete_album_record_handler = DeleteAlbumRecordHandler(album_repo)
 delete_album_record_router = delete_album_record_endpoint(delete_album_record_handler)
 
-get_user_album_records_handler = GetUserAlbumRecordsHandler(album_repo)
+get_user_album_records_handler = GetUserAlbumRecordsHandler(album_repo, song_repo)
 get_user_album_records_router = get_user_album_records_endpoint(get_user_album_records_handler)
 
 update_album_record_handler = UpdateAlbumRecordHandler(album_repo)
