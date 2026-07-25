@@ -37,7 +37,7 @@ from .Persistance.SongRecordRepositoryImpl import SongRecordRepositoryImpl
 
 from .Controllers.AlbumRecords.GetAlbumRecord import get_album_record_endpoint
 from .Controllers.AlbumRecords.CreateAlbumRecord import create_album_record_endpoint
-from .Controllers.AlbumRecords.DeleteAlbumRecord import delete_album_endpoint
+from .Controllers.AlbumRecords.DeleteAlbumRecord import delete_album_record_endpoint
 from .Controllers.AlbumRecords.GetUserAlbumRecords import get_user_album_records_endpoint
 from .Controllers.AlbumRecords.UpdateAlbumRecord import update_album_record_endpoint
 from src.RecordLifecycle.application.UseCases.AlbumRecord.GetAlbumRecord.GetAlbumRecordHandler import GetAlbumRecordHandler
@@ -47,9 +47,8 @@ from src.RecordLifecycle.application.UseCases.AlbumRecord.GetUserAlbumRecords.Ge
 from src.RecordLifecycle.application.UseCases.AlbumRecord.UpdateAlbumRecord.UpdateAlbumRecordHandler import UpdateAlbumRecordHandler
 from .Persistance.AlbumRecordRepositoryImpl import AlbumRecordRepositoryImpl
 
-videogame_client: MongoClient[dict[str, Any]]
-song_client: MongoClient[dict[str, Any]]
-album_client: MongoClient[dict[str, Any]]
+client: MongoClient[dict[str, Any]]
+
 videogame_database: Database[dict[str, Any]]
 song_database: Database[dict[str, Any]]
 album_database: Database[dict[str, Any]]
@@ -129,7 +128,7 @@ create_album_record_handler = CreateAlbumRecordHandler(album_repo)
 create_album_record_router = create_album_record_endpoint(create_album_record_handler)
 
 delete_album_record_handler = DeleteAlbumRecordHandler(album_repo)
-delete_album_record_router = delete_album_endpoint(delete_album_record_handler)
+delete_album_record_router = delete_album_record_endpoint(delete_album_record_handler)
 
 get_user_album_records_handler = GetUserAlbumRecordsHandler(album_repo)
 get_user_album_records_router = get_user_album_records_endpoint(get_user_album_records_handler)
