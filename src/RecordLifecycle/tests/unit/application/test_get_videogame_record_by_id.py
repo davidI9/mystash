@@ -35,7 +35,7 @@ def test_get_videogame_record_by_id():
     
     #assert
         assert(record.get_author() == "550e8400-e29b-41d4-a716-446655440002" 
-               and record.get_title() == RecordTitle("Test") 
+               and record.get_game_title() == RecordTitle("Test") 
                and record.get_date() == CreationDate("11/06/2006") 
                and record.get_description() == VideogameDescription("Test description")
                and record.get_rating() == VideogameRating(2)

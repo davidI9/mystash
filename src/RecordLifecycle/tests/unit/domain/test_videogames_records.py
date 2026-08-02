@@ -30,6 +30,6 @@ def test_videogames_records():
         assert(record.get_author() == AuthorId("550e8400-e29b-41d4-a716-446655440012"))
         assert(record.get_date() == CreationDate('11/06/2006'))
         assert(record.get_rating() == VideogameRating(3))
-        assert(record.get_title() == RecordTitle("Test Record"))
+        assert(record.get_game_title() == RecordTitle("Test Record"))
         assert(record.get_description() == VideogameDescription("test description"))
         assert(record.get_playtime() == VideogamePlaytime(127))
