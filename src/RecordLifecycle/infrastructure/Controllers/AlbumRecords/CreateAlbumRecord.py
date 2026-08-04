@@ -28,6 +28,8 @@ def create_album_record_endpoint(handler: CreateAlbumRecordHandler):
         except Exception as e:
             print(e)
 
+    return router
+
 def create_album_record(create_request: CreateAlbumRecordRequest, handler: CreateAlbumRecordHandler):
     try:
         command = CreateAlbumRecordCommand(AuthorId(create_request.author), RecordTitle(create_request.album_title), CreationDate(create_request.date), RecordId(str(uuid.uuid4())), ArtistName(create_request.artist), GenreName(create_request.main_genre))
