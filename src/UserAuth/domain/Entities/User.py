@@ -6,6 +6,7 @@ from src.UserAuth.domain.ValueObjects.UserId import UserId
 from src.UserAuth.domain.ValueObjects.Email import Email
 from src.UserAuth.domain.ValueObjects.UserName import UserName
 from src.UserAuth.domain.ValueObjects.AvatarUrl import AvatarUrl
+from src.UserAuth.domain.Events.UserCreated import UserCreated
 
 @dataclass
 class User(Aggregate):
