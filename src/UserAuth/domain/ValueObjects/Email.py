@@ -19,7 +19,6 @@ class Email:
         domain_part = parts[1]
         
         if not local_part:
-            raise ValueError("Email local part cannot be empty.")
-            
+            raise ValueError("Email local part cannot be empty.")   
         if "." not in domain_part:
             raise ValueError("Email domain must contain at least one '.' symbol.")
