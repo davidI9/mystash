@@ -7,19 +7,20 @@ from src.UserAuth.domain.ValueObjects.Email import Email
 from src.UserAuth.domain.ValueObjects.UserName import UserName
 from src.UserAuth.domain.ValueObjects.AvatarUrl import AvatarUrl
 from src.UserAuth.domain.Events.UserCreated import UserCreated
+from src.UserAuth.domain.ValueObjects.GoogleId import GoogleId
 
 @dataclass
 class User(Aggregate):
     id: UserId
     email: Email
     username: UserName
-    google_id: str
+    google_id: GoogleId
     created_at: datetime
     updated_at: datetime
     avatar_url: Optional[AvatarUrl] = None
 
     @classmethod
-    def create(cls, email: Email, username: UserName, google_id: str, avatar_url: Optional[AvatarUrl] = None):
+    def create(cls, email: Email, username: UserName, google_id: GoogleId, avatar_url: Optional[AvatarUrl] = None):
         user_id = UserId.generate()
         now = datetime.now()
         user = cls(
