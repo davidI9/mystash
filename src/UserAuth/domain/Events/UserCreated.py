@@ -5,4 +5,3 @@ from src.shared.domain.DomainEvent import DomainEvent
 class UserCreated(DomainEvent):
     user_id: str
     email: str
-    username: str
