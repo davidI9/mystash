@@ -5,7 +5,7 @@ from src.UserAuth.domain.ValueObjects.UserName import UserName
 from src.UserAuth.domain.ValueObjects.GoogleId import GoogleId
 from src.UserAuth.domain.ValueObjects.Email import Email
 from src.UserAuth.domain.ValueObjects.AvatarUrl import AvatarUrl
-from src.shared.application.EventBus.IEventBus import IEventBus
+from src.shared.application.IEventBus import IEventBus
 
 class CreateUserHandler:
     def __init__(self, user_repository: UserRepository, event_bus: IEventBus):
