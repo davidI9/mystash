@@ -18,3 +18,9 @@ dependencies = [
 [tool.pytest.ini_options]
 testpaths = ["src/RecordLifecycle/tests"]
 norecursedirs = ["mongo_volume", ".git", ".pytest_cache", "__pycache__", ".venv", "venv"]
+
+[tool.mypy]
+exclude = [
+    "^mongo_volume/",
+    "^\\.venv/"
+]

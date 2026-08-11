@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from DomainEvent import DomainEvent
+from .DomainEvent import DomainEvent
 
 @dataclass
 class Aggregate:
