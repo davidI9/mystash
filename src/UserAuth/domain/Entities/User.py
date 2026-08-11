@@ -33,7 +33,7 @@ class User(Aggregate):
             avatar_url=avatar_url
         )
         
-        user._record_event(UserCreated(user_id=user_id.value, email=email.value))
+        user._record_event(UserCreated(user_id=str(user_id.value), email=email.value))
         
         return user
         
@@ -41,16 +41,16 @@ class User(Aggregate):
         self.email = new_email
         self.updated_at = datetime.now(timezone.utc)
         
-        self._record_event(UserUpdated(user_id=self.id.value))
+        self._record_event(UserUpdated(user_id=str(self.id.value)))
         
     def update_avatar(self, new_avatar_url: AvatarUrl):
         self.avatar_url = new_avatar_url
         self.updated_at = datetime.now(timezone.utc)
         
-        self._record_event(UserUpdated(user_id=self.id.value))
+        self._record_event(UserUpdated(user_id=str(self.id.value)))
     
     def update_username(self, new_username: UserName):
         self.username = new_username
         self.updated_at = datetime.now(timezone.utc)
         
-        self._record_event(UserUpdated(user_id=self.id.value))
+        self._record_event(UserUpdated(user_id=str(self.id.value)))
