@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
-from src.UserAuth.domain.ValueObjects import GoogleId, UserId, UserName
+from src.UserAuth.domain.ValueObjects.UserId import UserId
+from src.UserAuth.domain.ValueObjects.UserName import UserName
+from src.UserAuth.domain.ValueObjects.GoogleId import GoogleId
 from ..Entities.User import User
 
 class UserRepository(ABC):
