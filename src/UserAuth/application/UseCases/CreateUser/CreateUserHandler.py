@@ -28,6 +28,9 @@ class CreateUserHandler:
         
         if command.username:
             user.set_username(UserName(command.username))
+        else:
+            short_id = user.id.value.replace("-", "")[:15]
+            user.set_username(UserName(f'user_{short_id}'))
 
         self.user_repository.save(user)
         
