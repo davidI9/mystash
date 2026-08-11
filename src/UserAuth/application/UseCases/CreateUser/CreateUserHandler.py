@@ -27,15 +27,14 @@ class CreateUserHandler:
         )
         
         if command.username:
-            user.set_username(UserName(command.username))
+            user.update_username(UserName(command.username))
         else:
-            short_id = user.id.value.replace("-", "")[:15]
-            user.set_username(UserName(f'user_{short_id}'))
+            short_id = str(user.id.value).replace("-", "")[:15]
+            user.update_username(UserName(f'user_{short_id}'))
 
         self.user_repository.save(user)
         
         events = user.pull_domain_events()
-        for event in events:
-            self.event_bus.publish(event)
+        self.event_bus.publish(events)
             
-        return user.id.value
+        return str(user.id.value)
