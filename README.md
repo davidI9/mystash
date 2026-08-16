@@ -22,6 +22,15 @@ Thank you for the interest!
 This is for now just a Backend which lets de user create records. This records are currently just for Videogames. The objective of this is to have a place where share your interests and register different activities.
 I am planing to add music, films, series, workouts, books, etc, in the future.
 
+## Dev Setup
+
+Install uv in your system and run:
+```bash
+uv sync
+```
+
+That should sync all the dependencies in its own virtual environment.
+
 ## Usage
 
 This code is and will be for now open, if you want to try by yourself: 
